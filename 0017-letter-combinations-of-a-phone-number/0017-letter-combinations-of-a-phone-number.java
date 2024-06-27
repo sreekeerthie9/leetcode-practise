@@ -1,14 +1,15 @@
 class Solution {
-    static void cp(String digits,String arr[],int idx,String str,List<String> li){
+    static void cp(String digits,String arr[],int idx,StringBuilder str,List<String> li){
         if(idx==digits.length()){
-            li.add(str);
+            li.add(str.toString());
             return;
         }
         int dig = (digits.charAt(idx)-'0');
         String s = arr[dig];
         for(char ch:s.toCharArray()){
-            
-            cp(digits,arr,idx+1,str+ch,li);
+            str.append(ch);
+            cp(digits,arr,idx+1,str,li);
+            str.deleteCharAt(str.length()-1);
             
         }
 
@@ -19,7 +20,7 @@ class Solution {
         }
         String arr[] = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
         List<String> li = new ArrayList<>();
-        String str = "";
+        StringBuilder str = new StringBuilder();
         cp(digits,arr,0,str,li);
         return li;
     }
