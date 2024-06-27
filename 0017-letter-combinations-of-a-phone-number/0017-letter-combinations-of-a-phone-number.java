@@ -4,7 +4,9 @@ class Solution {
             li.add(str);
             return;
         }
-        for(char ch:arr[(digits.charAt(idx)-'0')].toCharArray()){
+        int dig = (digits.charAt(idx)-'0');
+        String s = arr[dig];
+        for(char ch:s.toCharArray()){
             
             cp(digits,arr,idx+1,str+ch,li);
             
@@ -12,7 +14,7 @@ class Solution {
 
     }
     public List<String> letterCombinations(String digits) {
-        if(digits.length()<1){
+        if(digits==null || digits.isEmpty()){
             return new ArrayList<>();
         }
         String arr[] = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
