@@ -4,9 +4,9 @@ class Solution {
             li.add(str.toString());
             return;
         }
-        int dig = (digits.charAt(idx)-'0');
-        String s = arr[dig];
-        for(char ch:s.toCharArray()){
+        //int dig = (digits.charAt(idx)-'0');
+        //String s = arr[(digits.charAt(idx)-'0')];
+        for(char ch:arr[(digits.charAt(idx)-'0')].toCharArray()){
             str.append(ch);
             cp(digits,arr,idx+1,str,li);
             str.deleteCharAt(str.length()-1);
