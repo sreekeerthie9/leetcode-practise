@@ -47,9 +47,9 @@ class Solution {
     static void findarticulation(int[][] grid,int row,int col,int[][] dt,int[][] lrt,int[][] parent,articulationpoint art){
         int rows = grid.length;
         int cols = grid[0].length;
-        dt[row][col] = art.time;
+        dt[row][col] = lrt[row][col] = art.time;
         art.time++;
-        lrt[row][col] = dt[row][col];
+        
         int child = 0;
         int dir[][] = {{0,1},{0,-1},{1,0},{-1,0}};
         for(int[] d : dir){
@@ -61,12 +61,12 @@ class Solution {
                     parent[newrow][newcol] = row*cols+col;
                     findarticulation(grid,newrow,newcol,dt,lrt,parent,art);
                     lrt[row][col] = Math.min(lrt[row][col],lrt[newrow][newcol]);
-                    if(lrt[newrow][newcol]>=dt[row][col] && parent[row][col]!=-1){
+                    if(lrt[newrow][newcol]>dt[row][col] && parent[row][col]!=-1){
                         art.has = true;
                     }
                 }
                 else if(newrow*cols+newcol!=parent[row][col]){
-                    lrt[row][col] = Math.min(lrt[row][col],dt[newrow][newcol]);
+                    lrt[row][col] = Math.min(lrt[row][col],lrt[newrow][newcol]);
                 }
             }
         }
