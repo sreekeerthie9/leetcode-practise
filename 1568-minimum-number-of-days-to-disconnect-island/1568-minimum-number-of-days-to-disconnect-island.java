@@ -61,7 +61,7 @@ class Solution {
                     parent[newrow][newcol] = row*cols+col;
                     findarticulation(grid,newrow,newcol,dt,lrt,parent,art);
                     lrt[row][col] = Math.min(lrt[row][col],lrt[newrow][newcol]);
-                    if(lrt[newrow][newcol]>dt[row][col] && parent[row][col]!=-1){
+                    if(lrt[newrow][newcol]>=dt[row][col] && parent[row][col]!=-1){
                         art.has = true;
                     }
                 }
