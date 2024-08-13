@@ -1,35 +1,31 @@
 class Solution {
-    static void cs(int[] cand,int t,int idx,ArrayList<Integer> sl,List<List<Integer>> li){
+    private static void cs(int[] candidates,int idx,int sum,int target,ArrayList<Integer> li,List<List<Integer>> al){
         
-        if(t==0){
-            //if(!li.contains(sl)){
-                li.add(new ArrayList<>(sl));
-            //}
-            
-        }
-        if(idx>=cand.length || t<0){
+        if(target==sum){
+            al.add(new ArrayList<>(li));
             return;
         }
-        for(int i=idx;i<cand.length;i++){
-            if(i>idx && cand[i]==cand[i-1]){
+        if(idx>=candidates.length){
+            return;
+        }
+           
+        for(int i=idx;i<candidates.length;i++){
+            if(i>idx && candidates[i]==candidates[i-1]){
                 continue;
             }
-            if(t<cand[i]){
-                break;
+            if(sum>target){
+                continue;
             }
-            //if(cand[i]<=t){
-                sl.add(cand[i]);
-                cs(cand,t-cand[i],i+1,sl,li);
-                sl.remove(sl.size()-1);
-            //}
-           
+            li.add(candidates[i]);
+            cs(candidates,i+1,sum+candidates[i],target,li,al);
+            li.remove(li.size()-1);
         }
     }
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        List<List<Integer>> li = new ArrayList<>();
-        ArrayList<Integer> sl = new ArrayList<>();
+        List<List<Integer>> al = new ArrayList<>();
+        ArrayList<Integer> li = new ArrayList<>();
         Arrays.sort(candidates);
-        cs(candidates,target,0,sl,li);
-        return li;
+        cs(candidates,0,0,target,li,al);
+        return al;
     }
 }
