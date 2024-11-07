@@ -1,16 +1,14 @@
 class Solution {
     public int largestCombination(int[] candidates) {
-        int[] count = new int[32];
-        int max = 0;
+       int max = 0;
         for(int i=0;i<32;i++){
+             int count = 0;
             for(int num : candidates){
                 if((num & (1<<i))!=0){
-                    count[i]++;
+                    count++;
                 }
             }
-            if(max<count[i]){
-                max = count[i];
-            }
+            max = Math.max(count, max);
         }
         return max;
     }
