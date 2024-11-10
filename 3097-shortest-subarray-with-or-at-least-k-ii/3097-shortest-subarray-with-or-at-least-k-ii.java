@@ -1,6 +1,21 @@
 class Solution {
     public int minimumSubarrayLength(int[] nums, int k) {
-        int left = 1;
+        int min = Integer.MAX_VALUE;
+        int start = 0;
+        int end = 0;
+        int[] bitCount=new int[32];
+        while(end<nums.length){
+            updatedBitCount(bitCount, nums[end], 1);
+            while(start<=end && convertToNumber(bitCount)>=k){
+                min =  Math.min(min, end-start+1);
+                updatedBitCount(bitCount,nums[start],-1);
+                start++;
+            }
+            end++;
+        }
+        return min==Integer.MAX_VALUE ? -1 : min;
+        //binary search
+       /*  int left = 1;
         int right = nums.length;
         int min = -1;
 
@@ -14,10 +29,10 @@ class Solution {
                 left = mid+1;
             }
         }
-        return min;
+        return min; */
     }
 
-    private boolean valid(int[] nums, int k, int mid){
+    /* private boolean valid(int[] nums, int k, int mid){
         int[] bitCount = new int[32];
 
         for(int right = 0;right<nums.length;right++){
@@ -32,7 +47,7 @@ class Solution {
             }
         }
         return false;
-    }
+    } */
 
     private void updatedBitCount(int[] bitCount, int number, int x){
         for(int bit = 0; bit<32;bit++){
