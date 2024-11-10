@@ -1,11 +1,6 @@
 class Solution {
-    private int gcd(int x, int y){
-        if(y==0){
-            return x;
-        }
-        else{
-            return gcd(y, x%y);
-        }
+    private int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
     }
     
     public String gcdOfStrings(String str1, String str2) {
